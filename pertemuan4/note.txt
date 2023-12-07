@@ -1,0 +1,26 @@
+- Routing
+  - Query string
+  - Variable Rule
+  - POST Form data
+- Jinja (template engine)
+  - Cara menampilkan data
+  - Cara menggunakan if dan for loop
+  - Cara membuat komentar
+  - Perbedaan komentar  jinja dan html biasa
+- Projek yang dibikin dalam video adalah Kalkulator
+- Gunakan HTTP METHOD POST
+- Disediakan form yang berisi inputan angka1 dan angka2 lalu bisa memeilih aksi (tambah,bagi dll) baru submit dengan method post
+
+
+
+-- Nanti ku upda te di notion
+Minggu Pertama: Python Dasar
+Minggu Kedua: Flask: Routing dan Jinja
+Minggu Ketiga: Flask: CRUD by memory (menggunakan list)
+Minggu Keempat: Postgresql + Rstful api
+Minggu Kelima: Authentication
+Minggu Keenam: Swagger (https://swagger.io/docs/)
+Minggu Ketujuh: Projek
+Minggu Kedelapan: Projek
+
+Projek rencana todo list yang ada authentication nya. jadi setiap user akan punya todo list yang berbeda beda

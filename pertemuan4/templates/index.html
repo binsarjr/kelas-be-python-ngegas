@@ -1,0 +1,12 @@
+{% include 'header.html' %}
+
+<body>
+  <h1>{{ nama }}</h1>
+  <form action="{{ url_for('index') }}" method="POST">
+    <input type="number" name="angka1">
+    <input type="number" name="angka2">
+    <button>result ngab</button>
+  </form>
+</body>
+
+</html>
