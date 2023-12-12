@@ -98,4 +98,4 @@ def tambah(angka1, angka2):
 
 # python3 -m flask run --reload --debugger
 if __name__ == '__main__':
-  app.run(debug=True, use_reloader=True,host="0.0.0.0")
+  app.run(debug=True, use_reloader=True,host="0.0.0.0", port=5001)
