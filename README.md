@@ -26,8 +26,10 @@ Penugasan diadakan perminggu. Peserta diminta membuat video terkait materi yang 
   - Redirect
   - Response
   - Static Files
+  - CRUD (data dummy dengan List)
 - Database Postgresql
   - DML
+  - Implementasi dengan Flask
 - Authentication
   - Basic Auth
   - JWT
