@@ -8,7 +8,31 @@ Penugasan diadakan perminggu. Peserta diminta membuat video terkait materi yang 
 - Harus menggunakan suara pribadi
 - Dalam video harus berisi terkait materi yang sudah diberikan setiap minggunya
 
-
+## Materi
+- Python Dasar
+  - Tipe Data
+  - Variabel
+  - Komentar
+  - Aritmatika
+  - Perbandingan
+  - Percabangan (IF/Else)
+  - Perulangan
+- Python Lanjut
+  - Function
+  - Module
+- Flask (Web + RESTful API)
+  - Routing
+  - Templating (Jinja)
+  - Redirect
+  - Response
+  - Static Files
+- Database Postgresql
+  - DML
+- Authentication
+  - Basic Auth
+  - JWT
+- Dokumentasi API (Swagger)
+- Projek
 
 
 
