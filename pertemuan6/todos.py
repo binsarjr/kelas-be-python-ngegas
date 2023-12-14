@@ -58,3 +58,13 @@ def delete(id):
     if todo['id'] == id:
       todos.pop(index)
       break
+
+
+def get_by_id(id):
+  """
+  Digunakan untuk mengambil data todos berdasarkan id
+  """
+  for todo in todos:
+    if todo['id'] == id:
+      return todo
+  return None
