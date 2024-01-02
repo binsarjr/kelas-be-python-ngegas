@@ -17,7 +17,12 @@ def login():
     # Lakukan validasi username dan password
     username = request.form.get("username", None)
     password = request.form.get("password", None)
-    if username not in "admin" or password != "admin":
+    # HTNT: BIkin fungsi buat mengambil data user dari database
+    # Dengan menyiapkan 2 parameter di fungsinya yaitu username dan password
+    # Dan tabel user harus ada di database(postgres) dengan minimal kolom username dan password
+    # if !db.get_user(username, password):
+    #     return {"msg": "Username atau password salah"}, 401
+    if username != "admin" or password != "admin":
         return {"msg": "Username atau password salah"}, 401
 
     # Jika validasi berhasil, buat access token
