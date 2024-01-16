@@ -56,6 +56,29 @@ def find_by_id(produk_id: int):
         }
 
 
+# contoh menggunakan join
+def find_by_id_join(produk_id: int):
+    with conn.cursor() as cursor:
+        cursor.execute(
+            "SELECT p.produk_id, p.name, p.thumbnail, p.stock, p.category_id, p.description, p.price, c.category FROM products p LEFT JOIN categories c ON p.category_id = c.category_id WHERE produk_id=%s",
+            (produk_id,),
+        )
+        item = cursor.fetchone()
+        if item is None:
+            return None
+
+        return {
+            "id": item[0],
+            "name": item[1],
+            "thumbnail": item[2],
+            "stock": item[3],
+            "category_id": item[4],
+            "description": item[5],
+            "price": item[6],
+            "category": item[7],
+        }
+
+
 def create(
     name: str,
     thumbnail: str,

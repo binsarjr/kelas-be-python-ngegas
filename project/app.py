@@ -44,6 +44,14 @@ def products_find_by_id(product_id: int):
     return product_controller.find_by_id(product_id)
 
 
+# ga bagus controller digabung
+@app.get("/products/<int:product_id>/join")
+def products_find_by_id_join(product_id: int):
+    import models.product as product_model
+
+    return product_model.find_by_id_join(product_id)
+
+
 @app.post("/products")
 def products_create():
     return product_controller.create()
