@@ -90,11 +90,11 @@ def create(
     cur = conn.cursor()
     try:
         cur.execute(
-            "INSERT INTO products (name, thumbnail, stock, category_id, description, price) VALUES (%s, %s, %s, %s, %s, %s)",
+            "INSERT INTO products (name, thumbnail, stock, category_id, description, price) VALUES (%s, %s, %s, %s, %s, %s)  RETURNING produk_id",
             (name, thumbnail, stock, category_id, description, price),
         )
         conn.commit()
-        return True
+        return cur.fetchone()[0]
     except Exception as e:
         conn.rollback()
         raise e

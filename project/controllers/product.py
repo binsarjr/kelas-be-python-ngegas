@@ -58,7 +58,7 @@ def create():
     thumbnail_location = "static/uploads/" + thumbnail.filename
     thumbnail.save(thumbnail_location)
 
-    product_model.create(
+    last_inserted_product_id = product_model.create(
         name=name,
         thumbnail=thumbnail_location,
         stock=stock,
@@ -69,7 +69,7 @@ def create():
 
     # create_product_images(product_id=product_id)
 
-    return {"message": "Product created"}, 201
+    return {"message": "Product created", "product_id": last_inserted_product_id}, 201
 
 
 def create_product_images(product_id: int):
