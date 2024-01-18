@@ -1,3 +1,4 @@
+from validators import product as product_validator
 from models import (
     product as product_model,
     category as category_model,
@@ -32,28 +33,17 @@ def create():
     description = request.form.get("description")
     price = request.form.get("price")
 
-    if name is None:
-        return {"message": "Name is required"}, 400
-    if thumbnail is None:
-        return {"message": "Thumbnail is required"}, 400
-    if stock is None:
-        return {"message": "Stock is required"}, 400
-    if category_id is None:
-        return {"message": "Category is required"}, 400
-    # validate category exists in database
-    category = category_model.find_by_id(category_id)
-    if category is None:
-        return {"message": "Category not found"}, 404
+    validate_errors = product_validator.create_product(
+        name=name,
+        thumbnail=thumbnail,
+        stock=stock,
+        category_id=category_id,
+        description=description,
+        price=price,
+    )
 
-    if description is None:
-        return {"message": "Description is required"}, 400
-    if price is None:
-        return {"message": "Price is required"}, 400
-
-    # process thumbnail save to static/uploads
-    # validate thumbnail is image only
-    if thumbnail.content_type not in ["image/jpeg", "image/png"]:
-        return {"message": "Thumbnail must be image only"}, 400
+    if validate_errors is not None:
+        return {"errors": validate_errors}, 422
 
     thumbnail_location = "static/uploads/" + thumbnail.filename
     thumbnail.save(thumbnail_location)
@@ -72,21 +62,59 @@ def create():
     return {"message": "Product created", "product_id": last_inserted_product_id}, 201
 
 
-def create_product_images(product_id: int):
-    images = request.files.getlist("images")
-    if images is None:
-        return {"message": "Images is required"}, 400
+def update(product_id: int):
+    name = request.form.get("name")
+    thumbnail = request.files.get("thumbnail")
+    stock = request.form.get("stock")
+    category_id = request.form.get("category_id")
+    description = request.form.get("description")
+    price = request.form.get("price")
 
-    # validate product exists in database
+    validate_errors = product_validator.update_product(
+        name=name,
+        thumbnail=thumbnail,
+        stock=stock,
+        category_id=category_id,
+        description=description,
+        price=price,
+    )
+
+    if validate_errors is not None:
+        return {"errors": validate_errors}, 422
+
     product = product_model.find_by_id(product_id)
     if product is None:
         return {"message": "Product not found"}, 404
 
-    for image in images:
-        # validate thumbnail is image only
-        if image.content_type not in ["image/jpeg", "image/png"]:
-            return {"message": "Images must be image only"}, 400
+    thumbnail_location = product["thumbnail"]
+    if thumbnail is not None:
+        thumbnail_location = "static/uploads/" + thumbnail.filename
+        thumbnail.save(thumbnail_location)
 
+    product_model.update(
+        product_id=product_id,
+        name=name,
+        thumbnail=thumbnail_location,
+        stock=stock,
+        category_id=category_id,
+        description=description,
+        price=price,
+    )
+
+    return {"message": "Product updated"}, 200
+
+
+def create_product_images(product_id: int):
+    images = request.files.getlist("images")
+
+    validate_errors = product_validator.create_product_images(
+        images=images, product_id=product_id
+    )
+
+    if validate_errors is not None:
+        return {"errors": validate_errors}, 422
+
+    for image in images:
         image_location = "static/uploads/" + image.filename
         image.save(image_location)
 
